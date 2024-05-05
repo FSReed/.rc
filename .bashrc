@@ -125,4 +125,5 @@ alias gs='git status'
 alias gc='git commit'
 alias gpo='git push origin'
 alias gl='git log --graph --oneline'
+alias gr='git restore --staged'
 
