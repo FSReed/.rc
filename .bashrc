@@ -117,3 +117,12 @@ PS1="$PS1"'\[\033[0m\] '
 
 alias s=neofetch
 alias R='source ~/.bashrc'
+alias M='vim ~/.bashrc`'
+
+# For Git
+alias ga='git add .'
+alias gs='git status'
+alias gc='git commit'
+alias gpo='git push origin'
+alias gl='git log --graph --oneline'
+
