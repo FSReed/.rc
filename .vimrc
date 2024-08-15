@@ -89,8 +89,6 @@ inoremap <c-w> <c-g>u<c-w>
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 
-map Q :q<CR>
-
 nnoremap tt	:tabnew<CR>
 nnoremap tn	:tabnext<CR>
 nnoremap tp	:tabprevious<CR>
@@ -104,9 +102,16 @@ map sd :set splitbelow<CR>:split<CR>
 
 set cindent
 set shiftwidth=4
+set ts=4
+set et
 
-inoremap {<CR> {}<Esc>i<CR><Esc>O
-" Add another } here, because of cindent
+filetype on
+filetype plugin on
+filetype indent on
+
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
 
 set cursorline
 vnoremap Y "+y
