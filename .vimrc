@@ -109,10 +109,13 @@ filetype on
 filetype plugin on
 filetype indent on
 
-inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap { {}<Left>
-
 set cursorline
 vnoremap Y "+y
+
+call plug#begin()
+
+Plug 'scrooloose/nerdtree'
+Plug 'jiangmiao/auto-pairs'
+
+call plug#end()
 
