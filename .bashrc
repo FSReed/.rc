@@ -117,7 +117,8 @@ PS1="$PS1"'\[\033[0m\] '
 
 alias s=neofetch
 alias R='source ~/.bashrc'
-alias M='vim ~/.bashrc'
+alias mbash='vim ~/.bashrc'
+alias mvim='vim ~/.rc/.vimrc'
 
 # For Git
 alias ga='git add .'
@@ -126,4 +127,7 @@ alias gc='git commit'
 alias gpo='git push origin'
 alias gl='git log --graph --oneline'
 alias gr='git restore --staged'
+
+# Initialize
+alias sync='source ~/.rc/sync_script'
 

@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+if [ "$#" != 1 ]
+then
+    echo "Unsupported arguments."
+else
+    rsync -av --exclude=".git" ~/.rc/"$1" ~
+fi
+
