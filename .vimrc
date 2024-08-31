@@ -15,8 +15,8 @@ set nocompatible
 " Turn on syntax highlighting.
 syntax on
 
-" Disable the default Vim startup message.
-set shortmess+=I
+" Disable the default Vim startup message.  --> No need.
+" set shortmess+=I
 
 " Show line numbers.
 set number
@@ -79,9 +79,6 @@ inoremap <Left>  <ESC>:echoe "Use h"<CR>
 inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
-" Recover from accidental Ctrl-u/w
-inoremap <c-u> <c-g>u<c-u>
-inoremap <c-w> <c-g>u<c-w>
 
 " --- My custom settings ---
 
@@ -89,33 +86,31 @@ inoremap <c-w> <c-g>u<c-w>
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 
-nnoremap tt	:tabnew<CR>
-nnoremap tn	:tabnext<CR>
-nnoremap tp	:tabprevious<CR>
-
 colorscheme torte
 map R :source $MYVIMRC<CR>
-map sr :set splitright<CR>:vsplit<CR>
-map sl :set nosplitright<CR>:vsplit<CR>
-map su :set nosplitbelow<CR>:split<CR>
-map sd :set splitbelow<CR>:split<CR>
+nnoremap sr :set splitright<CR>:vsplit<CR>
+nnoremap sl :set nosplitright<CR>:vsplit<CR>
+nnoremap su :set nosplitbelow<CR>:split<CR>
+nnoremap sd :set splitbelow<CR>:split<CR>
 
 set cindent
 set shiftwidth=4
-set ts=4
-set et
+set tabstop=4
+set expandtab
 
 filetype on
 filetype plugin on
 filetype indent on
 
 set cursorline
-vnoremap Y "+y
+map Y "+y
 
+" >>>>>>>>>> Vim-Plugins
 call plug#begin()
 
 Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
+" <<<<<<<<<< Vim-Plugins End
 

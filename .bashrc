@@ -118,7 +118,7 @@ PS1="$PS1"'\[\033[0m\] '
 alias s=neofetch
 alias R='source ~/.bashrc'
 alias mbash='vim ~/.bashrc'
-alias mvim='vim ~/.rc/.vimrc'
+alias mvim='vim ~/.rc/.vimrc && sync .vimrc'
 
 # For Git
 alias ga='git add .'
