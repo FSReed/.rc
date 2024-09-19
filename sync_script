@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/bash
 
 files_to_sync=(
     ".bashrc"
@@ -9,15 +9,23 @@ files_to_sync=(
     "plug.vim"
 )
 
-for item in $files_to_sync; do
-    rsync -avh $item ~
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+for item in "${files_to_sync[@]}"; do
+    echo -e "${BLUE} Syncing ${item}"
+    rsync -vh ./"$item" ~/ > /dev/null 2>&1
 done
 
 # Sync Plug.vim
-plug_vim_path="~/.vim/autoload/"
-if ! [[ -d $plug_vim_path ]]; then
-    mkdir -p $plug_vim_path
+plug_vim_path="$HOME/.vim/autoload/"
+if ! [ -d "$plug_vim_path" ]; then
+    echo -e "${GREEN}No .vim folder under home directory. Creating one...${NC}"
+    mkdir -p "$plug_vim_path"
 fi
 
-mv ~/plug.vim $plug_vim_path
+mv "$HOME"/plug.vim "$plug_vim_path"
 

@@ -5,6 +5,11 @@ if ! command -v git > /dev/null 2>&1; then
     exit 1
 fi
 
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
 
 echo -n "Do you want to generate ssh-key to github now?[Y/n]:"
 read -r github_ssh
@@ -12,17 +17,18 @@ if [ -z "$github_ssh" ]; then
     github_ssh="Y"
 fi
 if [ "$github_ssh" = "Y" ]; then
-    echo -n "Your email: (To connect to Github using ssh):"
-    read Email
-    ssh-keygen -t ed25519 -C "$Email"
-    echo "The public key is:"
+    if [ -f ~/.ssh/id_ed25519 ]; then
+        echo -e "${RED}Key already exists.${NC}"
+    else
+        echo -n "Your email: (To connect to Github using ssh):"
+        read Email
+        ssh-keygen -t ed25519 -C "$Email"
+    fi
+    echo -e "${GREEN}The public key is:${NC}"
     cat ~/.ssh/id_ed25519.pub
-    echo "Please make sure to register this ssh key in Github. I'll be waiting :)"
-    echo -n "Press Enter if you are ready:"
-    read -r nothing
 fi
 
-sync_script="~/.rc/sync_script"
-
-sh "$sync_script"
+# Execute the sync script
+echo -e "${GREEN}Synchronizing config files...${NC}"
+./sync_script
 
