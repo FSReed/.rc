@@ -21,8 +21,6 @@ if [[ $github_ssh -eq "Y" ]]; then
     read -r nothing
 fi
 
-git clone https://github.com/FSReed/.rc ~/.rc
-
 plug_vim_path="~/.vim/autoload/"
 sync_script="~/.rc/sync_script"
 
