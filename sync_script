@@ -1,9 +1,23 @@
 #!/usr/bin/sh
 
-if [ "$#" != 1 ]
-then
-    echo "Unsupported arguments."
-else
-    rsync -av --exclude=".git" ~/.rc/"$1" ~
+files_to_sync=(
+    ".bashrc"
+    ".vimrc"
+    ".tmux.conf"
+    ".gitconfig"
+    # Need special operation:
+    "plug.vim"
+)
+
+for item in $files_to_sync; do
+    rsync -avh $item ~
+done
+
+# Sync Plug.vim
+plug_vim_path="~/.vim/autoload/"
+if ! [[ -d $plug_vim_path ]]; then
+    mkdir -p $plug_vim_path
 fi
+
+mv ~/plug.vim $plug_vim_path
 

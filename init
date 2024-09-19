@@ -7,7 +7,7 @@ fi
 
 echo -n "Do you want to generate ssh-key to github now?[Y/n]:"
 read -r github_ssh
-if [[ -z github_ssh ]]; then
+if [[ -z $github_ssh ]]; then
     github_ssh="Y"
 fi
 if [[ $github_ssh -eq "Y" ]]; then
@@ -21,16 +21,9 @@ if [[ $github_ssh -eq "Y" ]]; then
     read -r nothing
 fi
 
-plug_vim_path="~/.vim/autoload/"
 sync_script="~/.rc/sync_script"
 
-chmod 700 $sync_script
+sh $sync_script
 
-mkdir -p $plug_vim_path
-$sync_script ~/.rc
-~/.rc/sync_script ~/.rc
-mv ~/plug.vim $plug_vim_path
-
-rm ~/.rc -r
 source ~/.bashrc
 
