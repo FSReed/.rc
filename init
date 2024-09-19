@@ -1,19 +1,20 @@
 #!/usr/bin/bash
 
-if ! [-x git]; then
+if ! command -v git > /dev/null 2>&1; then
     echo "You need to install git first"
+    exit 1
 fi
 
 
 echo -n "Do you want to generate ssh-key to github now?[Y/n]:"
 read -r github_ssh
-if [[ -z $github_ssh ]]; then
+if [ -z "$github_ssh" ]; then
     github_ssh="Y"
 fi
-if [[ $github_ssh -eq "Y" ]]; then
+if [ "$github_ssh" = "Y" ]; then
     echo -n "Your email: (To connect to Github using ssh):"
     read Email
-    ssh-keygen -t ed25519 -C $Email
+    ssh-keygen -t ed25519 -C "$Email"
     echo "The public key is:"
     cat ~/.ssh/id_ed25519.pub
     echo "Please make sure to register this ssh key in Github. I'll be waiting :)"
@@ -23,7 +24,5 @@ fi
 
 sync_script="~/.rc/sync_script"
 
-sh $sync_script
-
-source ~/.bashrc
+sh "$sync_script"
 

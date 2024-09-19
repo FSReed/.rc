@@ -98,7 +98,7 @@ fi
 #    . /etc/bash_completion
 #fi
 
-PS1='\[\033]0;Git Bash: $PWD\007\]' # set window title
+PS1='\[\033]0;$PWD\007\]' # set window title
 PS1="$PS1"'\[\033[55m\]'
 PS1="$PS1"'\[\033[95m\]'       # change to green
 PS1="$PS1""\n===🔥 Working On: \h 🔥===\n"
@@ -115,10 +115,9 @@ PS1="$PS1"'\[\033[94m\]'
 PS1="$PS1"'>'
 PS1="$PS1"'\[\033[0m\] '
 
-alias s=neofetch
 alias R='source ~/.bashrc'
 alias mbash='vim ~/.bashrc'
-alias mvim='vim ~/.rc/.vimrc && sync .vimrc'
+alias mvim='vim ~/.vimrc'
 
 # For Git
 alias ga='git add .'
@@ -127,7 +126,4 @@ alias gc='git commit'
 alias gpo='git push origin'
 alias gl='git log --graph --oneline'
 alias gr='git restore --staged'
-
-# Initialize
-alias sync='source ~/.rc/sync_script'
 
