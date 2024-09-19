@@ -9,14 +9,35 @@ files_to_sync=(
     "plug.vim"
 )
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
 NC='\033[0m'
+BOLD='\033[1m'
+UNDERLINE='\033[4m'
+RED='\033[31m'
+GREEN='\033[32m'
+YELLOW='\033[33m'
+BLUE='\033[34m'
+
+# Background colors
+Black='\033[40m'
+Red='\033[41m'
+Green='\033[42m'
+Yellow='\033[43m'
+Blue='\033[44m'
+Magenta='\033[45m'
+Cyan='\033[46m'
+White='\033[47m'
 
 for item in "${files_to_sync[@]}"; do
-    echo -e "${BLUE} Syncing ${item}"
+    if [ "$item" == ".bashrc" ]; then
+        echo -e "${YELLOW}Do you want to sync the .bashrc file?${NC}"
+        echo -en "${RED}CAUTION:${NC}This will overwrite the original .bashrc file![${BOLD}${UNDERLINE}${Cyan}Y${NC} to confirm overwrite]:"
+        read choice
+        if ! [ "$choice" == "Y" ]; then
+            echo -e "${YELLOW}Synchronization of .bashrc is cancelled.${NC}"
+            continue
+        fi
+    fi
+    echo -e "${BLUE} Syncing ${item}${NC}"
     rsync -vh ./"$item" ~/ > /dev/null 2>&1
 done
 

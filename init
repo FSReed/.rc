@@ -5,13 +5,24 @@ if ! command -v git > /dev/null 2>&1; then
     exit 1
 fi
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
 NC='\033[0m'
 BOLD='\033[1m'
 UNDERLINE='\033[4m'
+BLACK='\033[30m'
+RED='\033[31m'
+GREEN='\033[32m'
+YELLOW='\033[;33m'
+BLUE='\033[34m'
+
+# Background colors
+Black='\033[40m'
+Red='\033[41m'
+Green='\033[42m'
+Yellow='\033[43m'
+Blue='\033[44m'
+Magenta='\033[45m'
+Cyan='\033[46m'
+White='\033[47m'
 
 echo -en "Do you want to generate ssh-key to github now?[${BOLD}${UNDERLINE}Y${NC}/n]:"
 read -r github_ssh
@@ -20,7 +31,7 @@ if [ -z "$github_ssh" ]; then
 fi
 if [ "$github_ssh" = "Y" ]; then
     if [ -f ~/.ssh/id_ed25519 ]; then
-        echo -e "${RED}Key already exists.${NC}"
+        echo -e "${YELLOW}Key already exists.${NC}"
     else
         echo -n "Your email: (To connect to Github using ssh):"
         read Email
@@ -31,8 +42,10 @@ if [ "$github_ssh" = "Y" ]; then
 fi
 
 # Execute the sync script
-echo -e "${GREEN}Synchronizing config files...${NC}"
+echo -e "${BLUE}Synchronizing config files...${NC}"
+chmod 700 sync_script
 ./sync_script
 
 echo -e "All Done!"
+echo -e "Type ${White}${BLACK}source ~/.bashrc${NC} to start with brand new bash!"
 
