@@ -10,8 +10,10 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
+BOLD='\033[1m'
+UNDERLINE='\033[4m'
 
-echo -n "Do you want to generate ssh-key to github now?[Y/n]:"
+echo -en "Do you want to generate ssh-key to github now?[${BOLD}${UNDERLINE}Y${NC}/n]:"
 read -r github_ssh
 if [ -z "$github_ssh" ]; then
     github_ssh="Y"
@@ -31,4 +33,6 @@ fi
 # Execute the sync script
 echo -e "${GREEN}Synchronizing config files...${NC}"
 ./sync_script
+
+echo -e "All Done!"
 

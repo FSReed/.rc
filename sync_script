@@ -29,3 +29,5 @@ fi
 
 mv "$HOME"/plug.vim "$plug_vim_path"
 
+echo -e "${GREEN}All config files are synchronized${NC}"
+
