@@ -5,6 +5,11 @@ if ! command -v git > /dev/null 2>&1; then
     exit 1
 fi
 
+if ! command -v zsh > /dev/null 2>&1; then
+    echo "You need to install zsh first"
+    exit 1
+fi
+
 NC='\033[0m'
 BOLD='\033[1m'
 UNDERLINE='\033[4m'
@@ -24,6 +29,7 @@ Magenta='\033[45m'
 Cyan='\033[46m'
 White='\033[47m'
 
+# Setup SSH key to Github
 echo -en "Do you want to generate ssh-key to github now?[${BOLD}${UNDERLINE}Y${NC}/n]:"
 read -r github_ssh
 if [ -z "$github_ssh" ]; then
@@ -41,11 +47,18 @@ if [ "$github_ssh" = "Y" ]; then
     cat ~/.ssh/id_ed25519.pub
 fi
 
+# Get Oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Get Plugins
+
+# zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
 # Execute the sync script
 echo -e "${BLUE}Synchronizing config files...${NC}"
 chmod 700 sync_script
 ./sync_script
 
 echo -e "All Done!"
-echo -e "Type ${White}${BLACK}source ~/.bashrc${NC} to start with brand new bash!"
-
+echo -e "Type ${White}${BLACK}source ~/.zshrc${NC} to start with brand new bash!"
