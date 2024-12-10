@@ -1,6 +1,7 @@
 alias R='source ~/.zshrc'
 alias mzsh='vim ~/.zshrc'
 alias mvim='vim ~/.vimrc'
+alias malias='vim ${ZSH_CUSTOM}/aliases.zsh'
 
 # For Git
 alias ga='git add .'
