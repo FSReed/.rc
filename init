@@ -39,7 +39,7 @@ for item in ${prerequisites[@]}; do
 done
 echo ""
 if [ has_error != 0 ]; then
-    echo -e "Check ${UNDERLINE}README.md${NC} in this repo to find possible solutions."
+    echo -e "Check files under ${UNDERLINE}prerequisite${NC} to find possible solutions."
     exit 1
 else
     echo -e "${GREEN}All prerequisites have been met${NC}" 
