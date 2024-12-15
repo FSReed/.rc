@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+Config_Dir="./config"
+
 files_to_sync=(
     ".bashrc"
     ".zshrc"
@@ -30,17 +32,15 @@ Cyan='\033[46m'
 White='\033[47m'
 
 for item in "${files_to_sync[@]}"; do
-    if [ "${item}" == ".bashrc" ] || [ "${item}" == ".zshrc" ]; then
-        echo -e "${YELLOW}Do you want to sync "$item"?${NC}"
-        echo -en "${RED}CAUTION:${NC}This will overwrite the original file![${BOLD}${UNDERLINE}${Cyan}Y${NC} to confirm overwrite]:"
-        read choice
-        if ! [ "$choice" == "Y" ]; then
-            echo -e "${YELLOW}Synchronization of .bashrc is cancelled.${NC}"
-            continue
-        fi
+    echo -e "${YELLOW}Do you want to sync "$item"?${NC}"
+    echo -en "${RED}CAUTION:${NC}This will overwrite the original file![${BOLD}${UNDERLINE}${Cyan}Y${NC} to confirm syncing.]:"
+    read choice
+    if ! [ "$choice" != "Y" ]; then
+        echo -e "${YELLOW}Synchronization of .bashrc is cancelled.${NC}"
+        continue
     fi
     echo -e "${BLUE} Syncing ${item}${NC}"
-    rsync -vh ./"$item" ~/ > /dev/null 2>&1
+    cp ${Config_Dir}/${item} ${HOME} > /dev/null 2>&1
 done
 
 # Sync Plug.vim
@@ -57,3 +57,4 @@ mv "$HOME"/plug.vim "$plug_vim_path"
 mv "${HOME}/aliases.zsh" "${ZSH}/custom"
 
 echo -e "${GREEN}All config files are synchronized${NC}"
+

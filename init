@@ -1,15 +1,5 @@
 #!/usr/bin/bash
 
-if ! command -v git > /dev/null 2>&1; then
-    echo "You need to install git first"
-    exit 1
-fi
-
-if ! command -v zsh > /dev/null 2>&1; then
-    echo "You need to install zsh first"
-    exit 1
-fi
-
 NC='\033[0m'
 BOLD='\033[1m'
 UNDERLINE='\033[4m'
@@ -29,36 +19,63 @@ Magenta='\033[45m'
 Cyan='\033[46m'
 White='\033[47m'
 
+prerequisites=(
+    "git"
+    "zsh"
+    "tmux"
+    "nvim"
+)
+
+echo -e "${YELLOW}Checking prerequisites...${NC}"
+has_error=0
+for item in ${prerequisites[@]}; do
+    if ! command -v ${item} > /dev/null 2>&1; then
+        if [ ${has_error} == 0 ]; then
+            echo -en "You need to install: "
+            has_error=1
+        fi
+        echo -en ${GREEN}${item}${NC}
+    fi
+done
+echo ""
+if [ has_error != 0 ]; then
+    echo -e "Check ${UNDERLINE}README.md${NC} in this repo to find possible solutions."
+    exit 1
+else
+    echo -e "${GREEN}All prerequisites have been met${NC}" 
+fi
+
 # Setup SSH key to Github
 echo -en "Do you want to generate ssh-key to github now?[${BOLD}${UNDERLINE}Y${NC}/n]:"
 read -r github_ssh
-if [ -z "$github_ssh" ]; then
+if [ -z ${github_ssh} ]; then
     github_ssh="Y"
 fi
-if [ "$github_ssh" = "Y" ]; then
-    if [ -f ~/.ssh/id_ed25519 ]; then
+if [ ${github_ssh} = "Y" ]; then
+    if [ -f ${HOME}/.ssh/id_ed25519 ]; then
         echo -e "${YELLOW}Key already exists.${NC}"
     else
-        echo -n "Your email: (To connect to Github using ssh):"
+        echo -en "Your email: (To connect to Github using ssh):"
         read Email
-        ssh-keygen -t ed25519 -C "$Email"
+        ssh-keygen -t ed25519 -C ${Email}
     fi
     echo -e "${GREEN}The public key is:${NC}"
-    cat ~/.ssh/id_ed25519.pub
+    cat ${HOME}/.ssh/id_ed25519.pub
 fi
 
 # Get Oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Get Plugins
-
-# zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# Get zsh plugins
+echo -e "${YELLOW}Getting oh-my-zsh plugins...${NC}"
+chmod 700 ZshPlugins
+. zsh_plugins
 
 # Execute the sync script
 echo -e "${BLUE}Synchronizing config files...${NC}"
 chmod 700 sync_script
-./sync_script
+. sync_script
 
 echo -e "All Done!"
-echo -e "Type ${White}${BLACK}source ~/.zshrc${NC} to start with brand new bash!"
+echo -e "Type ${GREEN}source \${HOME}/.zshrc${NC} to work with a brand new shell!"
+
