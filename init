@@ -21,6 +21,7 @@ White='\033[47m'
 
 prerequisites=(
     "git"
+    "wget"
     "zsh"
     "tmux"
     "neovim"
@@ -67,7 +68,9 @@ if [ ${github_ssh} = "Y" ]; then
 fi
 
 # Get Oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if ! [ -d ${HOME}/.oh-my-zsh ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 # Get zsh plugins
 echo -e "${YELLOW}Getting oh-my-zsh plugins...${NC}"

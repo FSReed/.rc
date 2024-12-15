@@ -2,14 +2,15 @@
 
 Config_Dir="./config"
 
-files_to_sync=(
-    ".bashrc"
-    ".zshrc"
-    ".vimrc"
-    ".tmux.conf"
-    ".gitconfig"
-    # Need special operation:
-    "aliases.zsh"
+config_files=(
+    # Into Home Directory
+    ".bashrc:${HOME}"
+    ".zshrc:${HOME}"
+    ".vimrc:${HOME}"
+    ".tmux.conf:${HOME}"
+    ".gitconfig:${HOME}"
+    # Special Path
+    "aliases.zsh:${ZSH}/custom"
 )
 
 NC='\033[0m'
@@ -30,22 +31,21 @@ Magenta='\033[45m'
 Cyan='\033[46m'
 White='\033[47m'
 
-for item in "${files_to_sync[@]}"; do
-    echo -e "${YELLOW}Do you want to sync "$item"?${NC}"
-    echo -en "${RED}CAUTION:${NC}This will overwrite the original file![${BOLD}${Cyan}Y${NC} to confirm syncing.]:"
+for item in ${config_files[@]}; do
+    name=$(echo ${item} | cut -d: -f1)
+    path=$(echo ${item} | cut -d: -f2)
+    echo -e "Do you want to sync ${YELLOW}${UNDERLINE}${name}${NC}?"
+    echo -en "${RED}CAUTION:${NC}This will overwrite the original file![Input ${BOLD}${UNDERLINE}N${NC} to stop syncing.]:"
     read choice
-    if  [ "$choice" != "Y" ]; then
-        echo -e "Doesn't sync ${item}\n\n"
+    if  [[ ${choice} == "N" ]]; then
+        echo -e "${YELLOW}Doesn't sync ${UNDERLINE}${name}${NC}"
         continue
     fi
-    echo -e "Syncing ${item}"
-    cp ${Config_Dir}/${item} ${HOME} > /dev/null 2>&1
+
+    # Use hard link
+    echo -e "${GREEN}Syncing ${name}${NC}\n"
+    ln ${Config_Dir}/${name} ${path}
 done
 
-# Sync oh-my-zsh settings
-
-## Sync aliases.zsh
-mv "${HOME}/aliases.zsh" "${ZSH}/custom"
-
-echo -e "${GREEN}All config files are synchronized${NC}"
+echo -e "${GREEN}Finish synchronization.${NC}"
 
