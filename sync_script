@@ -43,8 +43,8 @@ for item in ${config_files[@]}; do
         continue
     fi
 
-    # Use hard link
-    echo -e "${GREEN}Copying ${name} into ${path}${NC}\n"
+    # Copy files
+    echo -e "${GREEN}Copying ${name} into ${path}${NC}"
     cp ${Config_Dir}/${name} ${path}
 done
 

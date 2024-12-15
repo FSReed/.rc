@@ -25,7 +25,6 @@ prerequisites=(
     "wget"
     "zsh"
     "tmux"
-    "neovim"
 )
 
 Prerequisite_Dir="./prerequisite"
@@ -33,7 +32,7 @@ Prerequisite_Dir="./prerequisite"
 echo -e "${YELLOW}Checking prerequisites...${NC}"
 for item in ${prerequisites[@]}; do
     if ! command -v ${item} > /dev/null 2>&1; then
-        echo -en "Doesn't find ${item}. Install now? [Y/n] "
+        echo -en "${RED}Doesn't find ${item}. Install now?${NC} [${UNDERLINE}Y${NC}/n] "
         read -r install
         if [ -z ${install} ]; then
             install="Y"
@@ -85,6 +84,9 @@ git clone https://github.com/LunarVim/Neovim-from-scratch.git ~/.config/nvim
 echo -e "${BLUE}Synchronizing config files...${NC}"
 chmod 700 sync_script
 . sync_script
+
+# Install neovim
+. prerequisite/neovim.install
 
 echo -e "All Done!"
 echo -e "Type ${GREEN}source \${HOME}/.zshrc${NC} to work with a brand new shell!"
