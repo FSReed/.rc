@@ -1,7 +1,7 @@
 CONFIG_DIR='${HOME}/.rc/config'
 
 alias R='source ~/.zshrc'
-alias mzsh='nvim ${CCONFIG_DIR}/.zshrc'
+alias mzsh='nvim ${CONFIG_DIR}/.zshrc'
 alias malias='nvim ${CONFIG_DIR}/aliases.zsh'
 
 # For Git
