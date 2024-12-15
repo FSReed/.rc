@@ -43,11 +43,11 @@ for item in ${config_files[@]}; do
     fi
 
     # Use hard link
-    echo -e "${GREEN}Syncing ${name}${NC}\n"
+    echo -e "${GREEN}Syncing ${name} into ${path}${NC}\n"
     if [[ -f ${path}/${name} ]]; then
         rm -f ${path}/${name}
-    ln ${Config_Dir}/${name} ${path}
     fi
+    ln ${Config_Dir}/${name} ${path}
 done
 
 echo -e "${GREEN}Finish synchronization.${NC}"
