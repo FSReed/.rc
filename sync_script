@@ -1,17 +1,18 @@
 #!/usr/bin/bash
 
 Config_Dir="./config"
+ZSH=""${HOME}"/.oh-my-zsh"
 
 config_files=(
     # Into Home Directory
-    ".bashrc:${HOME}"
-    ".zshrc:${HOME}"
-    ".vimrc:${HOME}"
-    ".tmux.conf:${HOME}"
-    ".gitconfig:${HOME}"
+    ".bashrc:"${HOME}""
+    ".zshrc:"${HOME}""
+    ".vimrc:"${HOME}""
+    ".tmux.conf:"${HOME}""
+    ".gitconfig:"${HOME}""
     # Special Path
-    "aliases.zsh:${ZSH}/custom"
-    "functions.zsh:${ZSH}/custom"
+    "aliases.zsh:"${ZSH}"/custom"
+    "functions.zsh:"${ZSH}"/custom"
 )
 
 NC='\033[0m'
@@ -35,17 +36,17 @@ White='\033[47m'
 for item in ${config_files[@]}; do
     name=$(echo ${item} | cut -d: -f1)
     path=$(echo ${item} | cut -d: -f2)
-    echo -e "Do you want to sync ${YELLOW}${UNDERLINE}${name}${NC}?"
+    echo -e "Do you want to sync ${YELLOW}${UNDERLINE}"${name}"${NC}?"
     echo -en "${RED}CAUTION:${NC}This will overwrite the original file![Input ${BOLD}${UNDERLINE}N${NC} to stop syncing.]:"
     read choice
-    if  [[ ${choice} == "N" ]]; then
-        echo -e "${YELLOW}Doesn't sync ${UNDERLINE}${name}${NC}"
+    if  [[ "${choice}" == "N" ]]; then
+        echo -e "${YELLOW}Doesn't sync ${UNDERLINE}"${name}"${NC}"
         continue
     fi
 
     # Copy files
-    echo -e "${GREEN}Copying ${name} into ${path}${NC}"
-    cp ${Config_Dir}/${name} ${path}
+    echo -e "${GREEN}Copying "${name}" into "${path}"${NC}"
+    cp "${Config_Dir}"/"${name}" "${path}"
 done
 
 echo -e "${GREEN}Finish synchronization.${NC}"

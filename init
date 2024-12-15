@@ -31,14 +31,14 @@ Prerequisite_Dir="./prerequisite"
 
 echo -e "${YELLOW}Checking prerequisites...${NC}"
 for item in ${prerequisites[@]}; do
-    if ! command -v ${item} > /dev/null 2>&1; then
-        echo -en "${RED}Doesn't find ${item}. Install now?${NC} [${UNDERLINE}Y${NC}/n] "
+    if ! command -v "${item}" > /dev/null 2>&1; then
+        echo -en "${RED}Doesn't find "${item}". Install now?${NC} [${UNDERLINE}Y${NC}/n] "
         read -r install
         if [ -z ${install} ]; then
             install="Y"
         fi
         if [ ${install} == "Y" ]; then
-            Script=${Prerequisite_Dir}/${item}.install
+            Script="${Prerequisite_Dir}"/"${item}".install
             chmod 700 ${Script}
             . ${Script}
         else
@@ -86,8 +86,8 @@ chmod 700 sync_script
 . sync_script
 
 # Install neovim
-. prerequisite/neovim.install
+. "${Prerequisite_Dir}"/neovim.install
 
 echo -e "All Done!"
-echo -e "Type ${GREEN}source \${HOME}/.zshrc${NC} to work with a brand new shell!"
+echo -e "Reconnect to terminal then type ${GREEN}source \${HOME}/.zshrc${NC} to work with a brand new shell!"
 
