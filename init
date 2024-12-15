@@ -72,7 +72,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Get zsh plugins
 echo -e "${YELLOW}Getting oh-my-zsh plugins...${NC}"
 chmod 700 ZshPlugins
-. zsh_plugins
+. plugins.zsh
 
 # Configure LazyVim
 git clone https://github.com/LunarVim/Neovim-from-scratch.git ~/.config/nvim

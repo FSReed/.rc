@@ -9,7 +9,6 @@ files_to_sync=(
     ".tmux.conf"
     ".gitconfig"
     # Need special operation:
-    "plug.vim"
     "aliases.zsh"
 )
 
@@ -33,27 +32,19 @@ White='\033[47m'
 
 for item in "${files_to_sync[@]}"; do
     echo -e "${YELLOW}Do you want to sync "$item"?${NC}"
-    echo -en "${RED}CAUTION:${NC}This will overwrite the original file![${BOLD}${UNDERLINE}${Cyan}Y${NC} to confirm syncing.]:"
+    echo -en "${RED}CAUTION:${NC}This will overwrite the original file![${BOLD}${Cyan}Y${NC} to confirm syncing.]:"
     read choice
-    if ! [ "$choice" != "Y" ]; then
-        echo -e "${YELLOW}Synchronization of .bashrc is cancelled.${NC}"
+    if  [ "$choice" != "Y" ]; then
+        echo -e "Doesn't sync ${item}\n\n"
         continue
     fi
-    echo -e "${BLUE} Syncing ${item}${NC}"
+    echo -e "Syncing ${item}"
     cp ${Config_Dir}/${item} ${HOME} > /dev/null 2>&1
 done
 
-# Sync Plug.vim
-plug_vim_path="$HOME/.vim/autoload/"
-if ! [ -d "$plug_vim_path" ]; then
-    echo -e "${GREEN}No .vim folder under home directory. Creating one...${NC}"
-    mkdir -p "$plug_vim_path"
-fi
-mv "$HOME"/plug.vim "$plug_vim_path"
-
 # Sync oh-my-zsh settings
 
-# Sync aliases.zsh
+## Sync aliases.zsh
 mv "${HOME}/aliases.zsh" "${ZSH}/custom"
 
 echo -e "${GREEN}All config files are synchronized${NC}"
