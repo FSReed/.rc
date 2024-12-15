@@ -1,3 +1,5 @@
+# For xv6 debug
+
 function xvdbg {
     local SESSION_NAME="xv6"
     # Make sure xv6's path is set to ${HOME}/xv6

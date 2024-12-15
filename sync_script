@@ -44,11 +44,8 @@ for item in ${config_files[@]}; do
     fi
 
     # Use hard link
-    echo -e "${GREEN}Syncing ${name} into ${path}${NC}\n"
-    if [[ -f ${path}/${name} ]]; then
-        rm -f ${path}/${name}
-    fi
-    ln ${Config_Dir}/${name} ${path}
+    echo -e "${GREEN}Copying ${name} into ${path}${NC}\n"
+    cp ${Config_Dir}/${name} ${path}
 done
 
 echo -e "${GREEN}Finish synchronization.${NC}"

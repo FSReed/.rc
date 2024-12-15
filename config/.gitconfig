@@ -2,7 +2,7 @@
 	email = 1714747596@qq.com
     name=FSReed
 [core]
-	editor = vim
+	editor = nvim
 [init]
 	defaultBranch = master
 [push]
