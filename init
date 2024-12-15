@@ -23,27 +23,30 @@ prerequisites=(
     "git"
     "zsh"
     "tmux"
-    "nvim"
+    "neovim"
 )
 
+Prerequisite_Dir="./prerequisite"
+
 echo -e "${YELLOW}Checking prerequisites...${NC}"
-has_error=0
 for item in ${prerequisites[@]}; do
     if ! command -v ${item} > /dev/null 2>&1; then
-        if [ ${has_error} == 0 ]; then
-            echo -en "You need to install: "
-            has_error=1
+        echo -en "Doesn't find ${item}. Install now? [Y/n] "
+        read -r install
+        if [ -z ${install} ]; then
+            install="Y"
         fi
-        echo -en ${GREEN}${item}${NC}
+        if [ ${install} == "Y" ]; then
+            Script=${Prerequisite_Dir}/${item}.install
+            chmod 700 ${Script}
+            . ${Script}
+        else
+            echo -e "${RED}Initialization failed${NC}"
+            exit 1
+        fi
     fi
 done
-echo ""
-if [ has_error != 0 ]; then
-    echo -e "Check files under ${UNDERLINE}prerequisite${NC} to find possible solutions."
-    exit 1
-else
-    echo -e "${GREEN}All prerequisites have been met${NC}" 
-fi
+echo -e "${GREEN}All prerequisites have been met${NC}" 
 
 # Setup SSH key to Github
 echo -en "Do you want to generate ssh-key to github now?[${BOLD}${UNDERLINE}Y${NC}/n]:"
@@ -70,6 +73,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 echo -e "${YELLOW}Getting oh-my-zsh plugins...${NC}"
 chmod 700 ZshPlugins
 . zsh_plugins
+
+# Configure LazyVim
+git clone https://github.com/LunarVim/Neovim-from-scratch.git ~/.config/nvim
 
 # Execute the sync script
 echo -e "${BLUE}Synchronizing config files...${NC}"
