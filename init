@@ -21,6 +21,7 @@ White='\033[47m'
 
 prerequisites=(
     "git"
+    "curl"
     "wget"
     "zsh"
     "tmux"
