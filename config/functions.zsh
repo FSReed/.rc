@@ -2,7 +2,7 @@ function xvdbg {
     local SESSION_NAME="xv6"
     # Make sure xv6's path is set to ${HOME}/xv6
     local DIR="${HOME}/${SESSION_NAME}"
-    if ! [[ -f ${DIR} ]]; then
+    if ! [[ -d ${DIR} ]]; then
         echo -e "No xv6 repo found"
         return
     fi
