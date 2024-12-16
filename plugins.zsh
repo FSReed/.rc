@@ -5,6 +5,7 @@
 plugins=(
     "zsh-users/zsh-syntax-highlighting"
     "zsh-users/zsh-autosuggestions"
+    "MichaelAquilina/zsh-you-should-use"
 )
 
 ZSH_CUSTOM_PLUGIN=${HOME}/.oh-my-zsh/custom/plugins

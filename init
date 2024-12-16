@@ -39,7 +39,6 @@ for item in ${prerequisites[@]}; do
         fi
         if [ ${install} == "Y" ]; then
             Script="${Prerequisite_Dir}"/"${item}".install
-            chmod 744 ${Script}
             . ${Script}
         else
             echo -e "${RED}Initialization failed${NC}"
@@ -74,15 +73,13 @@ fi
 
 # Get zsh plugins
 echo -e "${YELLOW}Getting oh-my-zsh plugins...${NC}"
-chmod 744 ZshPlugins
 . plugins.zsh
 
 # Configure LazyVim
-git clone https://github.com/LunarVim/Neovim-from-scratch.git ~/.config/nvim
+git clone -b 01-options https://github.com/LunarVim/Neovim-from-scratch.git ~/.config/nvim
 
 # Execute the sync script
 echo -e "${BLUE}Synchronizing config files...${NC}"
-chmod 744 sync_script
 . sync_script
 
 # Install neovim
