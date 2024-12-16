@@ -82,8 +82,8 @@ git clone -b 01-options https://github.com/LunarVim/Neovim-from-scratch.git ~/.c
 echo -e "${BLUE}Synchronizing config files...${NC}"
 . sync_script
 
-# Install neovim
-. "${Prerequisite_Dir}"/neovim.install
+# Install neovim, and some useful tools
+. "${Prerequisite_Dir}"/tools.install
 
 echo -e "All Done!"
 echo -e "Reconnect to terminal then type ${GREEN}source \${HOME}/.zshrc${NC} to work with a brand new shell!"
