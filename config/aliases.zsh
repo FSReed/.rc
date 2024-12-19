@@ -15,3 +15,7 @@ alias gl='git log --graph --oneline'
 # For ranger
 alias ra='ranger'
 
+# For cmake
+alias cbuild='cmake -S . -B build && cmake --build build'
+alias cmtest='cmake --build build --target'
+
