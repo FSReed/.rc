@@ -12,3 +12,6 @@ alias gc='git commit'
 alias gpo='git push origin'
 alias gl='git log --graph --oneline'
 
+# For ranger
+alias ra='ranger'
+
