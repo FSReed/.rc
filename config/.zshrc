@@ -10,5 +10,6 @@ plugins=(
     zsh-you-should-use
 )
 
+source $HOME/.profile
 source $ZSH/oh-my-zsh.sh
 
