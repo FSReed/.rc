@@ -12,6 +12,7 @@ config_files=(
   ".gitconfig:"${HOME}""
   # Special Path
   "aliases.zsh:"${ZSH}"/custom"
+  "agnoster.zsh-theme:${ZSH}/custom/themes"
   "functions.zsh:"${ZSH}"/custom"
 )
 
