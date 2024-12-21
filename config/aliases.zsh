@@ -1,6 +1,6 @@
 CONFIG_DIR="${HOME}"/.rc/config
 
-alias R='source ~/.zshrc'
+alias R='source ~/.zshrc; source ~/.profile'
 alias mzsh='nvim "${CONFIG_DIR}"/.zshrc'
 alias malias='nvim "${CONFIG_DIR}"/aliases.zsh'
 alias mfunc='nvim "${CONFIG_DIR}"/functions.zsh'
@@ -18,4 +18,7 @@ alias ra='ranger'
 # For cmake
 alias cbuild='cmake -S . -B build && cmake --build build'
 alias cmtest='cmake --build build --target'
+
+# For Neovide
+alias nide='neovide.exe --wsl --neovim-bin $(which nvim)'
 
