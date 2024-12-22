@@ -1,0 +1,23 @@
+# Install neovim, and some useful tools
+#
+TARGET_DIR="/opt"
+
+## Install the newest version of neovim
+if ! command -v nvim >/dev/null 2>&1; then
+  echo -e "Installing neovim into ${TARGET_DIR}..."
+  wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+  sudo tar -C /opt -xzf nvim-linux64.tar.gz
+  echo "PATH=/opt/nvim-linux64/bin:\${PATH}" >>${HOME}/.profile
+  rm nvim-linux64.tar.gz
+  echo -e "Neovim Installed."
+fi
+
+## Install yazi: With version 0.4.2
+if ! command -v yazi >/dev/null 2>&1; then
+  echo -e "Installing yazi into ${TARGET_DIR}..."
+  wget https://github.com/sxyazi/yazi/releases/download/v0.4.2/yazi-x86_64-unknown-linux-gnu.zip
+  sudo unzip -d /opt yazi-x86_64-unknown-linux-gnu.zip
+  echo "PATH=/opt/yazi-x86_64-unknown-linux-gnu:\$PATH" >>${HOME}/.profile
+  rm yazi-x86_64-unknown-linux-gnu.zip
+  echo -e "Yazi Installed"
+fi

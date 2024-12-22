@@ -6,14 +6,11 @@ alias malias='nvim "${CONFIG_DIR}"/aliases.zsh'
 alias mfunc='nvim "${CONFIG_DIR}"/functions.zsh'
 
 # For Git
-alias ga='git add .'
+alias ga='git add'
 alias gs='git status'
 alias gc='git commit'
 alias gpo='git push origin'
 alias gl='git log --graph --oneline'
-
-# For ranger
-alias ra='ranger'
 
 # For cmake
 alias cbuild='cmake -S . -B build && cmake --build build'

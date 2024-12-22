@@ -25,9 +25,9 @@ prerequisites=(
   "wget"
   "zsh"
   "tmux"
+  "fzf"
+  "unzip" # mason.nvim would use unzip
 )
-
-Prerequisite_Dir="./prerequisite"
 
 echo -e "${YELLOW}Checking prerequisites...${NC}"
 for item in ${prerequisites[@]}; do
@@ -38,8 +38,7 @@ for item in ${prerequisites[@]}; do
       install="Y"
     fi
     if [ ${install} == "Y" ]; then
-      Script="${Prerequisite_Dir}"/"${item}".install
-      . ${Script}
+      sudo apt-get install "${item}"
     else
       echo -e "${RED}Initialization failed${NC}"
       exit 1
@@ -83,7 +82,7 @@ echo -e "${BLUE}Synchronizing config files...${NC}"
 . sync_script
 
 # Install neovim, and some useful tools
-. "${Prerequisite_Dir}"/tools.install
+. tools.install
 
 echo -e "All Done!"
 echo -e "Reconnect to terminal then type ${GREEN}source \${HOME}/.zshrc${NC} to work with a brand new shell!"

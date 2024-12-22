@@ -18,3 +18,13 @@ function xvdbg {
     tmux attach-session -t ${SESSION_NAME}
 }
 
+# For yazi, cd to cwd after quit yazi. Very convenient!
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
