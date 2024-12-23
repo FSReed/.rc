@@ -14,6 +14,8 @@ config_files=(
   "aliases.zsh:"${ZSH}"/custom"
   "agnoster.zsh-theme:${ZSH}/custom/themes"
   "functions.zsh:"${ZSH}"/custom"
+  # Yazi Config
+  "yazi.toml":${HOME}/.config/yazi
 )
 
 NC='\033[0m'
@@ -46,6 +48,9 @@ for item in ${config_files[@]}; do
   fi
 
   # Copy files
+  if ! [ -d ${path} ]; then
+    mkdir -p ${path}
+  fi
   echo -e "${GREEN}Copying "${name}" into "${path}"${NC}"
   cp "${Config_Dir}"/"${name}" "${path}"
 done
