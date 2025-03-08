@@ -8,6 +8,7 @@ plugins=(
     zsh-syntax-highlighting
     zsh-autosuggestions
     zsh-you-should-use
+    command-not-found
 )
 
 source $HOME/.profile
