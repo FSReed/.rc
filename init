@@ -38,7 +38,18 @@ for item in ${prerequisites[@]}; do
       install="Y"
     fi
     if [ ${install} == "Y" ]; then
-      sudo apt-get install "${item}"
+      echo -en "Select a package manager(apt|dnf): "
+      read -r PACKAGE_NAMAGER
+      if [ $PACKAGE_NAMAGER == "apt" ]; then
+        echo "Using apt"
+        sudo apt install ${item}
+      elif [ $PACKAGE_NAMAGER == "dnf" ]; then
+        echo "Using dnf"
+        sudo dnf install ${item}
+      else
+        echo "Unsupported package manager."
+        exit 1
+      fi
     else
       echo -e "${RED}Initialization failed${NC}"
       exit 1
