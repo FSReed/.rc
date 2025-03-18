@@ -1,23 +1,23 @@
 #!/usr/bin/bash
 
-NC='\033[0m'
-BOLD='\033[1m'
-UNDERLINE='\033[4m'
-BLACK='\033[30m'
-RED='\033[31m'
-GREEN='\033[32m'
-YELLOW='\033[;33m'
-BLUE='\033[34m'
+NC='\e[0m'
+BOLD='\e[1m'
+UNDERLINE='\e[4m'
+BLACK='\e[30m'
+RED='\e[31m'
+GREEN='\e[32m'
+YELLOW='\e[;33m'
+BLUE='\e[34m'
 
 # Background colors
-Black='\033[40m'
-Red='\033[41m'
-Green='\033[42m'
-Yellow='\033[43m'
-Blue='\033[44m'
-Magenta='\033[45m'
-Cyan='\033[46m'
-White='\033[47m'
+Black='\e[40m'
+Red='\e[41m'
+Green='\e[42m'
+Yellow='\e[43m'
+Blue='\e[44m'
+Magenta='\e[45m'
+Cyan='\e[46m'
+White='\e[47m'
 
 prerequisites=(
   "git"
@@ -26,7 +26,7 @@ prerequisites=(
   "zsh"
   "tmux"
   "fzf"
-  "unzip" # mason.nvim would use unzip
+  "unzip" # Yazi would use unzip
 )
 
 echo -e "${YELLOW}Checking prerequisites...${NC}"
@@ -65,19 +65,19 @@ if [ -z ${github_ssh} ]; then
   github_ssh="Y"
 fi
 if [ ${github_ssh} = "Y" ]; then
-  if [ -f ${HOME}/.ssh/id_ed25519 ]; then
+  if [ -f "${HOME}"/.ssh/github ]; then
     echo -e "${YELLOW}Key already exists.${NC}"
   else
     echo -en "Your email: (To connect to Github using ssh):"
     read Email
-    ssh-keygen -t ed25519 -C ${Email}
+    ssh-keygen -t ed25519 -C "${Email}"
   fi
   echo -e "${GREEN}The public key is:${NC}"
-  cat ${HOME}/.ssh/id_ed25519.pub
+  cat "${HOME}"/.ssh/github.pub
 fi
 
 # Get Oh-my-zsh
-if ! [ -d ${HOME}/.oh-my-zsh ]; then
+if ! [ -d "${HOME}"/.oh-my-zsh ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
@@ -86,7 +86,7 @@ echo -e "${YELLOW}Getting oh-my-zsh plugins...${NC}"
 . plugins.zsh
 
 # Configure LazyVim
-git clone https://github.com/FSReed/nvim ${HOME}/.config/nvim
+git clone https://github.com/FSReed/nvim "${HOME}"/.config/nvim
 
 # Execute the sync script
 echo -e "${BLUE}Synchronizing config files...${NC}"
@@ -96,4 +96,4 @@ echo -e "${BLUE}Synchronizing config files...${NC}"
 . tools.install
 
 echo -e "All Done!"
-echo -e "Reconnect to terminal then type ${GREEN}source \${HOME}/.zshrc${NC} to work with a brand new shell!"
+echo -e "Reconnect to terminal then type ${GREEN}source \"\${HOME}\"/.zshrc${NC} to work with a brand new shell!"

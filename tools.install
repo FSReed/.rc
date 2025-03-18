@@ -6,10 +6,10 @@ TARGET_DIR="/opt"
 if ! command -v nvim >/dev/null 2>&1; then
   echo -e "Installing neovim into ${TARGET_DIR}..."
   ARCHIVE_NAME="nvim-linux-x86_64"
-  wget https://github.com/neovim/neovim/releases/download/v0.10.4/${ARCHIVE_NAME}.tar.gz
-  sudo tar -C /opt -xzf ${ARCHIVE_NAME}.tar.gz
-  echo "PATH=${TARGET_DIR}/nvim-linux-x86_64/bin:\$PATH" >>${HOME}/.profile
-  rm ${ARCHIVE_NAME}.tar.gz
+  wget https://github.com/neovim/neovim/releases/download/v0.10.4/"${ARCHIVE_NAME}".tar.gz
+  echo "PATH=\"${TARGET_DIR}\"/\"${ARCHIVE_NAME}\"/bin:\$PATH" >>"${HOME}"/.profile
+  sudo tar -C /opt -xzf "${ARCHIVE_NAME}".tar.gz
+  rm "${ARCHIVE_NAME}".tar.gz
   echo -e "Neovim Installed."
 fi
 
@@ -17,9 +17,9 @@ fi
 if ! command -v yazi >/dev/null 2>&1; then
   echo -e "Installing yazi into ${TARGET_DIR}..."
   ARCHIVE_NAME="yazi-x86_64-unknown-linux-gnu"
-  wget https://github.com/sxyazi/yazi/releases/download/v0.4.2/${ARCHIVE_NAME}.zip
-  sudo unzip -d /opt ${ARCHIVE_NAME}.zip
-  echo "PATH=${TARGET_DIR}/${ARCHIVE_NAME}:\$PATH" >>${HOME}/.profile
-  rm ${ARCHIVE_NAME}.zip
+  wget https://github.com/sxyazi/yazi/releases/download/v0.4.2/"${ARCHIVE_NAME}".zip
+  sudo unzip -d /opt "${ARCHIVE_NAME}".zip
+  echo "PATH=\"${TARGET_DIR}\"/\"${ARCHIVE_NAME}\":\$PATH" >>${HOME}/.profile
+  rm "${ARCHIVE_NAME}".zip
   echo -e "Yazi Installed"
 fi
