@@ -3,12 +3,13 @@ ZSH_THEME="agnoster"
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 plugins=(
-    git
-    fzf
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    zsh-you-should-use
-    command-not-found
+  git
+  fzf
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  zsh-you-should-use
+  command-not-found
+  docker
 )
 
 source $HOME/.profile
