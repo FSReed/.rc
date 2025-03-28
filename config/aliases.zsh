@@ -19,3 +19,7 @@ alias cmtest='cmake --build build --target'
 # For Neovide
 alias nide='neovide.exe --wsl --neovim-bin $(which nvim)'
 
+# For conda
+alias condaa='conda activate'
+alias condad='conda deactivate'
+
