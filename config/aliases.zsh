@@ -4,6 +4,7 @@ alias R='source ~/.zshrc; source ~/.profile'
 alias mzsh='nvim "${CONFIG_DIR}"/.zshrc'
 alias malias='nvim "${CONFIG_DIR}"/aliases.zsh'
 alias mfunc='nvim "${CONFIG_DIR}"/functions.zsh'
+alias mvim='cd ~/.config/nvim ; nvim'
 
 # For Git
 alias ga='git add'

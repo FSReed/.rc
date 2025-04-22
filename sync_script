@@ -16,6 +16,7 @@ config_files=(
   "functions.zsh:"${ZSH}"/custom"
   # Yazi config
   "yazi.toml":"${HOME}"/.config/yazi
+  "theme.toml":"${HOME}"/.config/yazi
 )
 
 NC='\033[0m'
@@ -50,7 +51,7 @@ for item in ${config_files[@]}; do
   if ! [ -d "${path}" ]; then
     mkdir -p "${path}"
   fi
-  echo -e "${GREEN}Copying "${name}" into "${path}"${NC}"
+  echo -e "${GREEN}Creating link of "${name}" at "${path}"${NC}"
   if [[ -f "${path}"/"${name}" || -L "${path}"/"${name}" ]]; then
     echo "${name} already exists. Creating new one..."
     rm "${path}"/"${name}"
