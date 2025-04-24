@@ -17,37 +17,44 @@ config_files=(
   # Yazi config
   "yazi.toml":"${HOME}"/.config/yazi
   "theme.toml":"${HOME}"/.config/yazi
+  # Git hooks
+  "pre-push:"${HOME}"/.config/git-hooks"
 )
 
-NC='\033[0m'
-BOLD='\033[1m'
-UNDERLINE='\033[4m'
-RED='\033[31m'
-GREEN='\033[32m'
-YELLOW='\033[33m'
-BLUE='\033[34m'
+NC='\e[0m'
+BOLD='\e[1m'
+UNDERLINE='\e[4m'
+RED='\e[31m'
+GREEN='\e[32m'
+YELLOW='\e[33m'
+BLUE='\e[34m'
 
 # Background colors
-Black='\033[40m'
-Red='\033[41m'
-Green='\033[42m'
-Yellow='\033[43m'
-Blue='\033[44m'
-Magenta='\033[45m'
-Cyan='\033[46m'
-White='\033[47m'
+Black='\e[40m'
+Red='\e[41m'
+Green='\e[42m'
+Yellow='\e[43m'
+Blue='\e[44m'
+Magenta='\e[45m'
+Cyan='\e[46m'
+White='\e[47m'
+
+echo -en "Do you want to sync all files automatically?[${BOLD}${UNDERLINE}N${NC} to stop syncing.]:"
+read AUTO
 
 for item in ${config_files[@]}; do
   name=$(echo ${item} | cut -d: -f1)
   path=$(echo ${item} | cut -d: -f2)
-  echo -en "Do you want to sync ${YELLOW}${UNDERLINE}"${name}"${NC}?[Input ${BOLD}${UNDERLINE}N${NC} to stop syncing.]:"
-  read choice
-  if [[ "${choice}" == "N" ]]; then
-    echo -e "${YELLOW}Doesn't sync ${UNDERLINE}"${name}"${NC}"
-    continue
+  if [[ "${AUTO}" == "N" ]]; then
+    echo -en "Do you want to sync ${YELLOW}${UNDERLINE}"${name}"${NC}?[Input ${BOLD}${UNDERLINE}N${NC} to stop syncing.]:"
+    read choice
+    if [[ "${choice}" == "N" ]]; then
+      echo -e "${YELLOW}Doesn't sync ${UNDERLINE}"${name}"${NC}"
+      continue
+    fi
   fi
 
-  # Copy files
+  # Sync files
   if ! [ -d "${path}" ]; then
     mkdir -p "${path}"
   fi

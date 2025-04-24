@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+echo -en "Commit hash: \e[32m"
+echo $(git log -1 --pretty=%H)
+echo -en "\e[0m"
+exit 0

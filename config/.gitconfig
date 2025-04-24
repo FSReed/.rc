@@ -3,6 +3,7 @@
     name=FSReed
 [core]
 	editor = nvim
+  hooksPath = "~/.config/git-hooks"
 [init]
 	defaultBranch = master
 [push]
