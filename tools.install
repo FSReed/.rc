@@ -23,3 +23,6 @@ if ! command -v yazi >/dev/null 2>&1; then
   rm "${ARCHIVE_NAME}".zip
   echo -e "Yazi Installed"
 fi
+
+## Get yazi theme: dracula
+git clone https://github.com/dracula/yazi.git ~/.config/yazi/flavors/dracula.yazi
