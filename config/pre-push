@@ -1,5 +1,3 @@
 #!/usr/bin/bash
-echo -en "Commit hash: \e[32m"
-echo $(git log -1 --pretty=%H)
-echo -en "\e[0m"
+echo -en $(git log -1 --pretty='Commit Hash: \e[32m%H\e[0m\n')
 exit 0
