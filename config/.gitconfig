@@ -4,6 +4,7 @@
 [core]
 	editor = nvim
   hooksPath = "~/.config/git-hooks"
+  quotepath = false
 [init]
 	defaultBranch = master
 [push]
