@@ -10,6 +10,7 @@ plugins=(
   zsh-you-should-use
   command-not-found
   docker
+  golang
 )
 
 source $HOME/.profile

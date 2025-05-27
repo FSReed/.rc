@@ -65,7 +65,7 @@ if [ -z ${github_ssh} ]; then
   github_ssh="Y"
 fi
 if [ ${github_ssh} = "Y" ]; then
-  if [ -f "${HOME}"/.ssh/github ]; then
+  if [ -f "${HOME}"/.ssh/id_ed25519 ]; then
     echo -e "${YELLOW}Key already exists.${NC}"
   else
     echo -en "Your email: (To connect to Github using ssh):"
