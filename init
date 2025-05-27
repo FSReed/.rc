@@ -73,7 +73,7 @@ if [ ${github_ssh} = "Y" ]; then
     ssh-keygen -t ed25519 -C "${Email}"
   fi
   echo -e "${GREEN}The public key is:${NC}"
-  cat "${HOME}"/.ssh/github.pub
+  cat "${HOME}"/.ssh/id_ed25519.pub
 fi
 
 # Get Oh-my-zsh
