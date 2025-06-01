@@ -24,3 +24,4 @@ alias nide='neovide.exe --wsl --neovim-bin $(which nvim)'
 alias condaa='conda activate'
 alias condad='conda deactivate'
 
+alias sq="rlwrap sqlite3"

@@ -10,6 +10,7 @@ config_files=(
   ".vimrc:"${HOME}""
   ".tmux.conf:"${HOME}""
   ".gitconfig:"${HOME}""
+  ".sqliterc:"${HOME}""
   # OMZ config
   "aliases.zsh:"${ZSH}"/custom"
   "agnoster.zsh-theme:"${ZSH}"/custom/themes"
