@@ -6,7 +6,7 @@ TARGET_DIR="/opt"
 if ! command -v nvim >/dev/null 2>&1; then
   echo -e "Installing neovim into ${TARGET_DIR}..."
   ARCHIVE_NAME="nvim-linux-x86_64"
-  wget https://github.com/neovim/neovim/releases/download/v0.10.4/"${ARCHIVE_NAME}".tar.gz
+  wget https://github.com/neovim/neovim/releases/download/v0.11.2/"${ARCHIVE_NAME}".tar.gz
   echo "PATH=\"${TARGET_DIR}\"/\"${ARCHIVE_NAME}\"/bin:\$PATH" >>"${HOME}"/.profile
   sudo tar -C /opt -xzf "${ARCHIVE_NAME}".tar.gz
   rm "${ARCHIVE_NAME}".tar.gz
