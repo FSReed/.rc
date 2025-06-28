@@ -12,6 +12,7 @@ alias gs='git status'
 alias gc='git commit'
 alias gpo='git push origin'
 alias gl='git log --graph --oneline'
+alias gst='git stash'
 
 # For cmake
 alias cbuild='cmake -S . -B build && cmake --build build'
