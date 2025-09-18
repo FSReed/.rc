@@ -16,3 +16,5 @@ plugins=(
 source $HOME/.profile
 source $ZSH/oh-my-zsh.sh
 
+export HISTSIZE=20000
+export SAVEHIST=$HISTSIZE
