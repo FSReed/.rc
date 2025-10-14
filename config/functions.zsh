@@ -28,3 +28,36 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# run map-reduce, 1 worker 1 coordinator
+function mr () {
+  if [ $# -le 1 ]; then
+    echo "Usage: mr [plugin] [files] [worker-nums=10]"
+    return
+  fi
+
+  local SESSION_NAME="mr"
+  local DIR="${HOME}/824/src/main"
+  local SIGNAL="TLock"
+  tmux has-session -t ${SESSION_NAME} 2> /dev/null
+  if [ $? != 0 ]; then
+      tmux new-session -d -s ${SESSION_NAME} -c ${DIR}
+      tmux send-key -t ${SESSION_NAME}:0 "tmux wait -L ${SIGNAL}; go build -buildmode=plugin ../mrapps/$1.go; tmux wait -U $SIGNAL" C-m
+      tmux send-key -t ${SESSION_NAME}:0 "go run mrcoordinator.go $2" C-m
+
+      echo -en "Spawning the coordinator... "
+      sleep 0.5 # Make sure the tmux session can acquire the lock first
+      tmux wait-for -L $SIGNAL
+      echo "Done!😋"
+      sleep 1
+
+      local worker_num=10
+      if [ $# -eq 3 ]; then
+        worker_num=$3
+      fi
+
+      for i in {1..$worker_num}; do
+        tmux new-window -d -t ${SESSION_NAME} -c ${DIR} "go run mrworker.go $1.so"
+      done
+  fi
+  tmux attach-session -t ${SESSION_NAME}
+}
